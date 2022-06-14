@@ -1,0 +1,17 @@
+{
+  "name": "@bubblydoo/cloudflare-workers-postgres-client",
+  "version": "0.0.3",
+  "type": "module",
+  "main": "./build/postgres.js",
+  "types": "./build/types-package/types/mod.d.ts",
+  "scripts": {
+    "build": "bash build.sh",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "build/*.js",
+    "build/*.wasm",
+    "build/types-package/types/",
+    "workers-override.ts"
+  ]
+}
