@@ -1,4 +1,4 @@
-# Cloudflare Workers Postgres Driver
+# Cloudflare Workers Postgres Client
 
 This is an experimental module.
 

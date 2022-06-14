@@ -1,6 +1,6 @@
 {
   "name": "@bubblydoo/cloudflare-workers-postgres-client",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "main": "./build/postgres.js",
   "types": "./build/types-package/types/mod.d.ts",
@@ -13,5 +13,10 @@
     "build/*.wasm",
     "build/types-package/types/",
     "workers-override.ts"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bubblydoo/cloudflare-workers-postgres-client"
+  },
+  "homepage": "https://github.com/bubblydoo/cloudflare-workers-postgres-client#readme"
 }
