@@ -20,7 +20,7 @@ const createClient = () => {
 const worker = {
   async fetch(request, env, ctx) {
     const client = createClient();
-    
+
     await client.connect()
 
     const userIds = await client.queryArray('select id from "Users" limit 10');

@@ -1,8 +1,8 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { build } from "esbuild";
-import { replace } from "esbuild-plugin-replace"; 
-import textReplace from "esbuild-plugin-text-replace"; 
+import { replace } from "esbuild-plugin-replace";
+import textReplace from "esbuild-plugin-text-replace";
 import fs from "fs/promises";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -53,8 +53,8 @@ try {
       }),
     ]
     // define: {
-    //   "unused_stdCrypto": "null", 
-    //   "unused_webCrypto": "null", 
+    //   "unused_stdCrypto": "null",
+    //   "unused_webCrypto": "null",
     // }
   });
 } catch (e) {

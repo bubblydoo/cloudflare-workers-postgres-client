@@ -1,6 +1,6 @@
 {
   "name": "@bubblydoo/cloudflare-workers-postgres-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "main": "./build/postgres.js",
   "types": "./build/types-package/types/mod.d.ts",
