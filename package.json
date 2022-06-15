@@ -4,13 +4,15 @@
   "type": "module",
   "main": "./build/postgres.js",
   "types": "./build/types-package/types/mod.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build": "bash build.sh",
     "prepublishOnly": "npm run build"
   },
   "files": [
-    "build/*.js",
-    "build/*.wasm",
+    "build/postgres.js",
+    "build/buffer.js",
+    "build/deferred.js",
     "build/types-package/types/",
     "workers-override.ts"
   ],
@@ -18,5 +20,12 @@
     "type": "git",
     "url": "https://github.com/bubblydoo/cloudflare-workers-postgres-client"
   },
-  "homepage": "https://github.com/bubblydoo/cloudflare-workers-postgres-client#readme"
+  "homepage": "https://github.com/bubblydoo/cloudflare-workers-postgres-client#readme",
+  "dependencies": {
+    "esbuild": "^0.14.43"
+  },
+  "devDependencies": {
+    "esbuild-plugin-replace": "^1.2.0",
+    "esbuild-plugin-text-replace": "^1.2.0"
+  }
 }

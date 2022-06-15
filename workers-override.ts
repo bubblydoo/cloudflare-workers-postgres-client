@@ -228,15 +228,4 @@ namespace Deno {
   }
 }
 
-// @ts-expect-error ignore
 globalThis.Deno = Deno
-
-export class FinalizationRegistry {
-  constructor() {}
-
-  register() {}
-  unregister() {}
-}
-
-// @ts-ignore
-globalThis.FinalizationRegistry = FinalizationRegistry
