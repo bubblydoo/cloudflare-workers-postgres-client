@@ -6,6 +6,8 @@ This is an experimental module.
 
 Heavily based on [cloudflare/worker-template-postgres](https://github.com/cloudflare/worker-template-postgres), but cleaned up and bundled into a single module.
 
+This needs a Cloudflare Tunnel to your database running. To setup a Cloudflare Tunnel, you can use [this docker-compose.yml](https://github.com/bubblydoo/cloudflare-tunnel-postgres-docker-compose/blob/main/docker-compose.yml).
+
 ```bash
 npm i @bubblydoo/cloudflare-workers-postgres-client
 # or
