@@ -1,8 +1,16 @@
+![npm](https://img.shields.io/npm/v/@bubblydoo/cloudflare-workers-postgres-client)
+
 # Cloudflare Workers Postgres Client
 
 This is an experimental module.
 
 Heavily based on [cloudflare/worker-template-postgres](https://github.com/cloudflare/worker-template-postgres), but cleaned up and bundled into a single module.
+
+```bash
+npm i @bubblydoo/cloudflare-workers-postgres-client
+# or
+yarn add @bubblydoo/cloudflare-workers-postgres-client
+```
 
 ```ts
 import { Client } from '@bubblydoo/cloudflare-workers-postgres-client';
