@@ -1,7 +1,6 @@
-// deno-lint-ignore-file
 import { Buffer } from "./build/buffer.js";
 import { deferred } from "./build/deferred.js";
-import { Deferred } from "./build/types-package";
+import { __Deferred as Deferred } from "./build/types-package";
 
 declare namespace Deno {
   export interface Reader {
@@ -83,7 +82,6 @@ export class TcpOverWebsocketConn implements Deno.Conn {
   constructor(ws: WebSocket) {
     this.ws = ws;
 
-    // @ts-ignore
     this.buffer = new Buffer();
 
     this.empty_notifier = deferred();
@@ -92,7 +90,6 @@ export class TcpOverWebsocketConn implements Deno.Conn {
     this.ws.addEventListener("message", (msg: any) => {
       const data = new Uint8Array(msg.data);
 
-      // @ts-ignore
       this.buffer.write(data).then(() => {
         this.empty_notifier.resolve();
       });
@@ -125,13 +122,11 @@ export class TcpOverWebsocketConn implements Deno.Conn {
         if (this.buffer.length === 0) {
           reject(0); // TODO what is the correct way to handle errors
         } else {
-          // @ts-ignore
           const bytes = await this.buffer.read(p);
           resolve(bytes);
         }
       });
     } else {
-      // @ts-ignore
       return this.buffer.read(p);
     }
   }
@@ -174,7 +169,11 @@ export const workerDenoPostgres_connect = function (
     if (options.hostname === undefined) {
       throw new Error("Tunnel hostname undefined");
     }
-    const resp = fetch(options.hostname, {
+    let hostname = options.hostname
+    if (!hostname.startsWith("https://")) {
+      hostname = `https://${hostname}`;
+    }
+    const resp = fetch(hostname, {
       headers: {
         ...cfAccess,
         Upgrade: "websocket",
@@ -182,11 +181,8 @@ export const workerDenoPostgres_connect = function (
     })
       .then((resp) => {
         // N.B. `webSocket` property exists on Workers `Response` type.
-        // @ts-ignore
         if (resp.webSocket) {
-          // @ts-ignore
           resp.webSocket.accept();
-          // @ts-ignore
           let c = new TcpOverWebsocketConn(resp.webSocket);
           resolve(c);
         } else {

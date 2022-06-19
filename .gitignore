@@ -1,5 +1,4 @@
 .DS_Store
 build
-package-lock.json
 *.tgz
 node_modules/

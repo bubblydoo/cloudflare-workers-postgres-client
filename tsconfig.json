@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es2022",
+    "module": "es2022",
+    "importHelpers": true,
     "lib": ["esnext"],
     "types": ["@cloudflare/workers-types"],
     "moduleResolution": "node",
