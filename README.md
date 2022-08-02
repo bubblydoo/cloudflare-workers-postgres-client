@@ -47,3 +47,22 @@ export default worker;
 ## How it works
 
 It uses the [postgres](https://deno.land/x/postgres@v0.16.1) Deno module, bundles it, and adds some code to make it work with Cloudflare Workers.
+
+## Tips
+### Disable SSL 
+Cloudflare tunnel already encrypts the connection so the Client might have issues connecting to the instance. If thats your case, you can disable SSL with some client properties:
+
+```
+const client = new Client({
+			user: "testUser",
+			database: "testDatabase",
+			// hostname is the full URL to your pre-created Cloudflare Tunnel, see documentation here:
+			// https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/create-tunnel
+			hostname: "https://myTunnel.myDomainIncludedInCloudflare.com",
+			password: "superPass", // use a secret to store passwords
+			port: "5432",
+			tls: {
+				enabled: false,
+			},
+		});
+```
