@@ -1,4 +1,4 @@
-import { build, emptyDir } from "https://deno.land/x/dnt/mod.ts";
+import { build, emptyDir } from "https://deno.land/x/dnt@0.32.0/mod.ts";
 
 await emptyDir("./build/types-package");
 
@@ -16,5 +16,8 @@ await build({
   },
   typeCheck: false,
   test: false,
-  declaration: true
+  declaration: true,
+  compilerOptions: {
+    lib: ["dom"]
+  }
 });

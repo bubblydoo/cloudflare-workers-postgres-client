@@ -46,4 +46,4 @@ export default worker;
 
 ## How it works
 
-It uses the [postgres](https://deno.land/x/postgres@v0.16.1) Deno module, bundles it, and adds some code to make it work with Cloudflare Workers.
+It uses the [postgres](https://deno.land/x/postgres@v0.17.0) Deno module, bundles it, and adds some code to make it work with Cloudflare Workers.
