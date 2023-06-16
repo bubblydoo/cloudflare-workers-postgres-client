@@ -71,20 +71,27 @@ declare namespace Deno {
 }
 
 export class TcpOverWebsocketConn implements Deno.Conn {
-  localAddr: Deno.Addr = { transport: "tcp", hostname: "localhost", port: 5432 };
-  remoteAddr: Deno.Addr = { transport: "tcp", hostname: "localhost", port: 5432 };
+  localAddr: Deno.Addr = {
+    transport: "tcp",
+    hostname: "localhost",
+    port: 5432,
+  };
+  remoteAddr: Deno.Addr = {
+    transport: "tcp",
+    hostname: "localhost",
+    port: 5432,
+  };
   rid: number = 1;
 
   ws: WebSocket;
   buffer: Buffer;
-  empty_notifier: Deferred<void>;
+  empty_notifier: Deferred<void> = deferred();
+  closed_notifier: Deferred<void> = deferred();
 
   constructor(ws: WebSocket) {
     this.ws = ws;
 
     this.buffer = new Buffer();
-
-    this.empty_notifier = deferred();
 
     // Incoming messages get written to a buffer
     this.ws.addEventListener("message", (msg: any) => {
@@ -100,6 +107,7 @@ export class TcpOverWebsocketConn implements Deno.Conn {
     });
     this.ws.addEventListener("close", () => {
       this.empty_notifier.resolve();
+      this.closed_notifier.resolve();
       console.log("ws close");
     });
     this.ws.addEventListener("open", () => {
@@ -141,6 +149,11 @@ export class TcpOverWebsocketConn implements Deno.Conn {
   close(): void {
     this.ws.close();
   }
+
+  closeAndWait(): Promise<void> {
+    this.close();
+    return this.closed_notifier;
+  }
 }
 
 export const workerDenoPostgres_startTls = function (
@@ -169,7 +182,7 @@ export const workerDenoPostgres_connect = function (
     if (options.hostname === undefined) {
       throw new Error("Tunnel hostname undefined");
     }
-    let hostname = options.hostname
+    let hostname = options.hostname;
     if (!hostname.startsWith("https://")) {
       hostname = `https://${hostname}`;
     }
@@ -187,7 +200,8 @@ export const workerDenoPostgres_connect = function (
           resolve(c);
         } else {
           throw new Error(
-            `Failed to create WebSocket connection: ${resp.status} ${resp.statusText}`
+            `Failed to create WebSocket connection: ${resp.status} ${resp.statusText}` +
+              (resp.status === 530 ? " Is your tunnel down?" : "")
           );
         }
       })
