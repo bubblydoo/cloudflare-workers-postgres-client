@@ -1,5 +1,7 @@
 ![npm](https://img.shields.io/npm/v/@bubblydoo/cloudflare-workers-postgres-client)
 
+## ⚠️ This module is unmaintained, we recommend using [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) instead.
+
 # Cloudflare Workers Postgres Client
 
 This is an experimental module.
